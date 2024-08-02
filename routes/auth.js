@@ -19,10 +19,20 @@ router.post(
       return res.status(400).json({ errors: errors.array() });
     }
     User.create({
-        name:req.body.name,
-        email:req.body.email,
-        password:req.body.password
-    }).then(user=>res.json(user))
+      name: req.body.name,
+      email: req.body.email,
+      password: req.body.password,
+    })
+      .then((user) => res.json(user))
+      .catch((err) => {
+        console.log("Error creating user:",err);
+        if(err.code===11000){
+          return res.status(400).json({
+            error:'Please enter a unique value for email',
+            message:"Email already exists"
+          });
+        }
+      });
   }
 );
 
