@@ -67,6 +67,7 @@ router.post(
     body("password", "Password Cannot be blank").exists(),
   ],
   async (req, res) => {
+   let success=false;
     // if there are errors, return Bad request and the errors
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -95,7 +96,8 @@ router.post(
         },
       };
       const Authtoken = jwt.sign(payload, JWT_SECRET);
-      res.json({Authtoken});
+      success=true;
+      res.json({success, Authtoken});
     } catch (error) {
       console.error(error.message);
       res.status(500).send("Internal Server Error");
