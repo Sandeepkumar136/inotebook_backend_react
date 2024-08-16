@@ -14,6 +14,10 @@ app.use(cors())
 // Available Routes
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/notes', require('./routes/notes'));
+app.get('/health', (res) => {
+  res.send('Server is up and running');
+});
+
 
 
 app.listen(port, () => {
