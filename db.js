@@ -1,9 +1,8 @@
 const mongoose=require('mongoose');
-const mongoURI="mongodb://localhost:27017/inotebook?directConnection=true";
-
+require('dotenv').config();
 const connectToMongo=async()=>{
     try {
-        mongoose.connect(mongoURI);
+        mongoose.connect(process.env.MONGODB_URI);
             console.log('Connected to mongo Database successfully')
     } catch (error) {
         console.error('Having Error to Connection in mongo DataBase');
